@@ -4,8 +4,8 @@
         <table class="table table-hover" style="height:20px; overflow:auto;">
                 <thead class="text-primary">
                     <tr>
-                        <th>Estado</th>
                         <th>Fecha</th>
+                        <th>Condicion</th>
                         <th>Prioridad</th>
                         <th>Ubicacion</th>
                         <th>Servicio</th>
@@ -18,21 +18,24 @@
                 <tfoot>
                         <!-- Button trigger modal -->
                         <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-placement="top" title="Ver todas las solicitudes completadas">
-                            <i class="fa fa-eye" aria-hidden="true"></i> Completos</a>
+                            <i class="fa fa-eye" aria-hidden="true"></i> Estados</a>
                         </button>
                 </tfoot>
                 <tbody>
                     @foreach($completos as $com)
                     <tr>
-                        {{--ESTADO--}}
-                        @if($com->condicion==3)
-                            <td width="5%"><span class="label label-primary">En Proceso</span></td>
-                        @else
-                            <td width="10%"><span class="label label-success">Completo</span></td>
-                        @endif
 
                         {{--FECHA--}}
                         <td width="10%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
+
+                        {{--CONDICION--}}
+                        @if($com->condicion==1)
+                            <td width="7%"><span class="label label-success">Completo</span></td>
+                        @elseif($com->condicion==2)
+                            <td width="7%"><span class="label label-danger">En Proceso</span></td>
+                        @else
+                            <td width="7%"><span class="label label-danger">Rechazado</span></td>
+                        @endif
 
                         {{--PRIORIDAD--}}
                         <td width="10%">{{$com->prioridad}}</td>

@@ -4,9 +4,9 @@
         <table class="table table-hover" style="height:20px; overflow:auto;">
                 <thead class="text-primary">
                     <tr>
+                        <th>Id</th>
                         <th>Fecha</th>
-                        <th>Prioridad</th>
-                        <th>Ubicacion</th>
+                        <th>Condicion</th>
                         <th>Categoria</th>
                         <th>Sub Categoria</th>
                         <th>Tipo</th>
@@ -16,14 +16,20 @@
                 <tbody>
                     @foreach($complit as $com)
                     <tr>
+                        {{--ID--}}
+                        <td width="5%">{{$com->id}}</td>
+
                         {{--FECHA--}}
-                        <td width="10%">{{$com->created_at->format('d-m-Y')}}</td>
+                        <td width="8%">{{$com->created_at->format('d-m-Y')}}</td>
 
-                        {{--PRIORIDAD--}}
-                        <td width="10%">{{$com->prioridad}}</td>
-
-                        {{--UBICACION--}}
-                        <td width="10%">{{$com->ubicacion}}</td>
+                        {{--CONDICION--}}
+                        @if($com->condicion==1)
+                            <td width="7%"><span class="label label-success">Completo</span></td>
+                        @elseif($com->condicion==2)
+                            <td width="7%"><span class="label label-primary">En Proceso</span></td>
+                            @else
+                            <td width="7%"><span class="label label-danger">Rechazado</span></td>
+                        @endif
 
                         {{--CATEGORIA--}}
                         @if($com->category==1)
