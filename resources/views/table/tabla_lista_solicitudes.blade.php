@@ -51,7 +51,7 @@
             @endif
 
             {{--DESCRIPCION con limitante de caracteres--}}
-            <td width="40%">{{str_limit($solicitud->description, 100)}}</td>
+            <td width="40%">{{str_limit($solicitud->description, 90)}}</td>
 
             <td class="td-actions text-right">
                 {{--EDITAR--}}

@@ -121,7 +121,7 @@
 
 @endsection
 @if ($c_completo<>null)
-    @include('table.tabla_lista_completados')
+    @include('table.tabla_lista_estados')
 @endif
 
 @include('solicitudes.include.button-float')

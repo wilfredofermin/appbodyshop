@@ -9,7 +9,9 @@
                             <p class="category">Solicitudes completas</p>
                         </div>
                         <div class="card-content table-responsive">
-                            @include('table.tabla_lista_completadosModal')
+                            @if ($complit<>null)
+                            @include('table.tabla_lista_estados_modal')
+                            @endif
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cerrar</button>
                             </div>

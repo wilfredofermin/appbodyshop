@@ -45,7 +45,7 @@ class SolicitudController extends Controller
             $solicitudes = Dbrequest::where('subcategory','LIKE','%'.$searchText.'%')
                 ->where('estado',1)
                 ->where('user_id',Auth::id())
-                ->where('condicion','<>',1)
+                ->where('condicion',3)
                 ->orderBy('created_at','desc')
                 ->Paginate(4);
 
@@ -67,6 +67,7 @@ class SolicitudController extends Controller
             //FIN BUSCARDOR //////////////////////////////////////////////////////////////////////////////
 
             $m_solicitudes = Dbrequest::where('user_id',Auth::id())->where('estado',1)->get();
+
             //SUCURSALES
             $sucursales=Gerenica::where('estado',1)->where('tipo',1)->get();
 
@@ -82,8 +83,8 @@ class SolicitudController extends Controller
             $categories=Category::all();
 
             //SOLITUDES COMPLETADAS Y EN PROCESO | 1 : COMPLETADO | 2 : EN PROCESO
-            $completos=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',1)->take(3)->orderBy('created_at','desc')->get();
-            $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',1)->orderBy('created_at','desc')->get();
+            $completos=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->take(3)->orderBy('updated_at','asc')->get();
+            $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->orderBy('updated_at','asc')->get();
             ///CONTEO INDIVIDUAL /////////////////////////////////////////////////////
 
             //SOLITUDES EN PROCESO
@@ -136,8 +137,7 @@ class SolicitudController extends Controller
         //'ubicacion', 'servicio', 'area','prioridad','category','subcategory','type','description','estado','user','condicion'
         $solicitud= new Dbrequest();
         $solicitud->ubicacion=$request->get('ubicacion');
-        $serv=$request->get('servicio');
-        $solicitud->servicio=$serv;
+        $solicitud->servicio=$request->get('servicio');
         $solicitud->area=$request->get('area');
         $solicitud->prioridad=$request->get('prioridad');
         $solicitud->category=$request->get('category');
@@ -152,8 +152,9 @@ class SolicitudController extends Controller
 
         if ($request->imagen != null) {
             $extension = $request->file('imagen')->getClientOriginalExtension();
-
-            $file_name = $serv. '.' . $extension;
+            $numero_randon=rand ( 10000 , 99999 );
+            $fecha=Carbon::now()->toDateString();
+            $file_name = $numero_randon.$fecha. '.' . $extension;
             //Aqui redimensiono la imagen
                  $img = Image::make($request->file('imagen'));
 
@@ -205,7 +206,24 @@ class SolicitudController extends Controller
      */
     public function edit($id)
     {
-        //
+        $solicitud=Dbrequest::find($id);
+
+        $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->orderBy('updated_at','asc')->get();
+
+        //SUCURSALES
+        $sucursales=Gerenica::where('estado',1)->where('tipo',1)->get();
+        //TIPO DE SERVICIO
+        $services=Service::where('estado',1)->get();
+
+        //TIPO DE AREA
+        $areas=Gerenica::where('estado',1)->where('tipo',3)->get();
+
+        $c_solicitudes=Dbrequest::where('user_id',Auth::id())->where('estado',1)->count();
+
+        //CATEGORIA
+        $categories=Category::all();
+
+        return view('solicitudes.edit')->with(compact('complit','solicitud','sucursales','services','areas','categories'));
     }
 
     /**
@@ -217,15 +235,58 @@ class SolicitudController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        // dd($request);
+        //'ubicacion', 'servicio', 'area','prioridad','category','subcategory','type','description','estado','user','condicion'
+        $solicitud= Dbrequest::findorFail($id);
+        $solicitud->ubicacion=$request->get('ubicacion');
+        $solicitud->servicio=$request->get('servicio');
+        $solicitud->area=$request->get('area');
+        $solicitud->prioridad=$request->get('prioridad');
+        $solicitud->category=$request->get('category');
+        $solicitud->subcategory=$request->get('subcategory');
+        $solicitud->type=$request->get('type');
+        $solicitud->description=$request->get('description');
+        $solicitud->condicion=$request->get('condicion');
+        $solicitud->user_id=Auth::id();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        // dd($solicitud->service);
+
+        if ($request->imagen != null) {
+            $extension = $request->file('imagen')->getClientOriginalExtension();
+            $numero_randon=rand ( 10000 , 99999 );
+            $fecha=Carbon::now()->toDateString();
+            $file_name = $numero_randon.$fecha. '.' . $extension;
+            //Aqui redimensiono la imagen
+            $img = Image::make($request->file('imagen'));
+
+            // ->resize(128,115)
+            $img->save('img/solicitudes/'.$img.$file_name);
+
+            $solicitud->imagen = $file_name;
+
+            $solicitud->save();
+
+            //Aqui envio la notificacion del cambio realizado.
+            $notification = array(
+                'message' => 'Solicutud actualizada exitosamente',
+                'alert-type' => 'update_solicitud'
+            );
+            //session()->flash('notification',$notification);
+            return redirect('/solicitud')->with($notification);
+
+        }
+            //De lo contrario realiza los siguien | Esto permite guardar sin tener que cambiar la imagen actual.
+            $solicitud->save();
+
+            $notification = array(
+                'message' => 'Solicutud actualizada exitosamente',
+                'alert-type' => 'update_solicitud'
+            );
+            //session()->flash('notification',$notification);
+        return redirect('/solicitud')->with($notification);
+
+
+    }
     public function destroy($id)
     {
 

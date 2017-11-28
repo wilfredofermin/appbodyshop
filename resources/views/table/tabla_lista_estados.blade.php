@@ -4,6 +4,7 @@
         <table class="table table-hover" style="height:20px; overflow:auto;">
                 <thead class="text-primary">
                     <tr>
+                        <th>Id</th>
                         <th>Fecha</th>
                         <th>Condicion</th>
                         <th>Prioridad</th>
@@ -17,13 +18,16 @@
                 </thead>
                 <tfoot>
                         <!-- Button trigger modal -->
-                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-placement="top" title="Ver todas las solicitudes completadas">
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-placement="right" rel="tooltip" title="Ver el estado de tus solicitudes">
                             <i class="fa fa-eye" aria-hidden="true"></i> Estados</a>
                         </button>
                 </tfoot>
                 <tbody>
                     @foreach($completos as $com)
                     <tr>
+
+                        {{--ID--}}
+                        <td width="3%">{{$com->id}}</td>
 
                         {{--FECHA--}}
                         <td width="10%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
@@ -32,7 +36,7 @@
                         @if($com->condicion==1)
                             <td width="7%"><span class="label label-success">Completo</span></td>
                         @elseif($com->condicion==2)
-                            <td width="7%"><span class="label label-danger">En Proceso</span></td>
+                            <td width="7%"><span class="label label-primary">En Proceso</span></td>
                         @else
                             <td width="7%"><span class="label label-danger">Rechazado</span></td>
                         @endif

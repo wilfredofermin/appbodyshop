@@ -17,7 +17,7 @@
                                                SOLICITUD DE SERVICIOS
                                             </h3>
                                         </div>
-                                        <div class="wizard-navigation">
+                                        <div class="">
                                             <ul>
                                                 <li><a href="#info" data-toggle="tab">Ubicacion</a></li>
                                                 <li><a href="#tipo" data-toggle="tab">Solicitud</a></li>
@@ -35,7 +35,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label"><i class="material-icons">home</i> Sucursal</label>
                                                             <select required id="ubic" name="ubicacion" class="form-control" >
-                                                                <option value="">Ubicacion </option>
+                                                                <option value="">Sucursal</option>
                                                                 @foreach($sucursales as $sucursal)
                                                                     <option value="{{$sucursal->name}}">{{$sucursal->name}}</option>
                                                                 @endforeach
@@ -49,13 +49,13 @@
                                                                 @foreach($services as $service)
                                                                     <option value="{{$service->id}}">{{$service->name}}</option>
                                                                 @endforeach
-                                                            </select>
+                                                        </select>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label class="control-label"><i class="material-icons">place</i> Area de referencia</label>
+                                                        <label class="control-label"><i class="material-icons">place</i> Area de referencia</label>
                                                             <select required name="area" class="form-control" id="select-tipo">
                                                                 <option value="">Indique el area</option>
                                                                 @foreach($areas as $area)
@@ -99,7 +99,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-10 col-sm-offset-1">
                                                         <div class="col-sm-4">
-                                                            <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Averia, error o mal funciomiento del sistema.">
+                                                            <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Averia, error o mal funciomiento de sistemas.">
                                                                 <input required type="radio" name="type" value="1">
                                                                 <div class="icon">
                                                                     <i class="material-icons">report_problem</i>
@@ -108,7 +108,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Permisos,creación, modificación o eliminación de servicio. ">
+                                                            <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Asistencia, informacion, tutoria y màs. ">
                                                                 <input type="radio" name="type" value="2">
                                                                 <div class="icon">
                                                                     <i class="material-icons">record_voice_over</i>
@@ -117,7 +117,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Tutoria y ayuda de sistema.">
+                                                            <div class="choice" data-toggle="wizard-radio" rel="tooltip" title="Creacion,modificacion o eliminacion de permisos.">
                                                                 <input type="radio" name="type" value="3">
                                                                 <div class="icon">
                                                                     <i class="material-icons">verified_user</i>
@@ -168,7 +168,7 @@
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
-                                    {{--AQUI INDICO LE TIPO DE CONDICION--}}
+                                    {{--AQUI INDICO LE TIPO DE CONDICION | PENDIENTE POR DEFAULT--}}
                                     <input type="hidden" name="condicion" value="3">
                                     {!!Form::close()!!}
                                 </div>

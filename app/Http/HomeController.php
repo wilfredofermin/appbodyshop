@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dbrequest;
 use App\SubCategory;
 use Illuminate\Http\Request;
 use App\Category;
@@ -22,7 +23,8 @@ class HomeController extends Controller
             ->where('tipo',1)
             ->get();
         $categories=Category::all();
-        return view('home')->with(compact('categories','sucursales','notification'));
+
+        return view('home')->with(compact('categories','sucursales','notification','complit'));
     }
 
     public function show()

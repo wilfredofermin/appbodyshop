@@ -1,4 +1,4 @@
-
+@if($complit<>null)
 <div class="col-md-12">
     <div class="card">
         <table class="table table-hover" style="height:20px; overflow:auto;">
@@ -60,3 +60,4 @@
             </table>
     </div>
 </div>
+@endif

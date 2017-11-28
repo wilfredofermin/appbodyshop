@@ -28,10 +28,13 @@
             toastr["info"]("Bienvenido !", "{!! Auth::user()->name !!}",{positionClass: "toast-bottom-right",progressBar:true})
             break;
         case 'create_solicitud':
-            toastr["success"]("La solicitud ha sido creada exitosamente !", "NUEVA SOLICITUD",{positionClass: "toast-top-right"})
+            toastr["success"]("La solicitud ha sido creada exitosamente !", "SOLICITUD NUEVA",{positionClass: "toast-top-right"})
             break;
         case 'delete_solicitud':
-            toastr["error"]("La solicitud ha sido eliminada exitosamente !", "ELIMINAR SOLICITUD",{positionClass: "toast-top-right"})
+            toastr["error"]("La solicitud ha sido eliminada exitosamente !", "SOLICITUD ELIMINADA",{positionClass: "toast-top-right"})
+            break;
+        case 'update_solicitud':
+            toastr["info"]("La solicitud ha sido actualizada exitosamente !", "SOLICITUD ACTUALIZADA",{positionClass: "toast-top-right"})
             break;
     }
     @endif
