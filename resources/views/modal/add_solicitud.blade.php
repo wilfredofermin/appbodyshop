@@ -2,7 +2,7 @@
 <div class="modal fade" id="ModalSoliciutd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="container">
-                    <div class="row">
+            <div class="row">
                         <div class="col-sm-8">
                             <!--      Wizard container        -->
                             <div class="wizard-container">
@@ -21,7 +21,7 @@
                                             <ul>
                                                 <li><a href="#info" data-toggle="tab">Ubicacion</a></li>
                                                 <li><a href="#tipo" data-toggle="tab">Solicitud</a></li>
-                                                <li><a href="#description" data-toggle="tab">Descripcion Extras</a></li>
+                                                <li><a href="#description" data-toggle="tab">Descripcion </a></li>
                                             </ul>
                                         </div>
                                         {{--DATOS DEL EQUIPO--}}
@@ -67,8 +67,8 @@
                                                             <label class="control-label"><i class="material-icons">low_priority</i> Nivel de urgencia</label>
                                                             <select name="prioridad" class="form-control">
                                                                 <option value="Normal"> Normal</option>
-                                                                <option value="Bajo">Bajo</option>
-                                                                <option value="Alto">Alto</option>
+                                                                <option value="Bajo">Baja</option>
+                                                                <option value="Alto">Alta</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@
 
                                                         <div class="picture-container">
                                                             <div class="picture">
-                                                                <img src="{{asset('img/soporte.png')}}" class="picture-src" id="wizardPicturePreview" title="">
+                                                                <img src="{{asset('img/file_upload.gif')}}" class="picture-src" id="wizardPicturePreview" title="">
                                                                 <input name="imagen" type="file" accept=".png, .jpg, .jpeg"  id="wizard-picture">
                                                             </div>
                                                             <h6>SUBIR IMAGEN</h6>
@@ -175,6 +175,6 @@
                             </div> <!-- wizard container -->
                         </div>
                     </div> <!-- row -->
-                </div> <!--  big container -->
+        </div> <!--  big container -->
     </div>
 </div>

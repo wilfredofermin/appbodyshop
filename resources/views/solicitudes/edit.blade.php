@@ -22,7 +22,7 @@
                 <ul>
                         <li><a href="#info" data-toggle="tab">Ubicacion</a></li>
                         <li><a href="#tipo" data-toggle="tab">Solicitud</a></li>
-                        <li><a href="#description" data-toggle="tab">Descripcion Extras</a>
+                        <li><a href="#description" data-toggle="tab">Descripcion</a>
                     </li>
                 </ul>
                 {{--DATOS DEL EQUIPO--}}
@@ -76,8 +76,8 @@
                                     <select name="prioridad" class="form-control">
                                         <option value="{{$solicitud->prioridad}}">{{$solicitud->prioridad}} </option>
                                         <option value="Normal"> Normal</option>
-                                        <option value="Bajo">Bajo</option>
-                                        <option value="Alto">Alto</option>
+                                        <option value="Baja">Baja</option>
+                                        <option value="Alta">Alta</option>
                                     </select>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
 
                                 <div class="picture-container">
                                     <div class="picture">
-                                        <img src="{{asset('img/solicitudes/'.$solicitud->imagen)}}" class="picture-src" id="wizardPicturePreview" title="">
+                                        <img src="{{asset('img/file_upload.gif')}}" class="picture-src" id="wizardPicturePreview" title="">
                                         <input name="imagen" type="file" accept=".png, .jpg, .jpeg"  id="wizard-picture">
                                     </div>
                                     <h6>SUBIR IMAGEN</h6>
@@ -199,8 +199,8 @@
         <div class="content">
             <div class="card card-profile">
                 <div align="center">
-                    <a href="{{url('img/solicitudes/'.$solicitud->imagen)}}">
-                        <img src="{{asset('img/solicitudes/'.$solicitud->imagen)}}"  class="img-responsive" alt="imagen" style="height:240px;" >
+                    <a href="{{url($solicitud->imagen)}}">
+                        <img src="{{asset($solicitud->imagen)}}"  class="img-responsive" alt="imagen" style="width:auto;  height:240px;" >
                     </a>
                 </div>
             </div>
@@ -254,6 +254,12 @@
                         <label class="control-label"><i class="material-icons">home</i> Sucursal</label>
                         <p class="card-content">
                             {{$solicitud->subcategory}}
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="control-label"><i class="material-icons">date_range</i> Fecha compromiso</label>
+                        <p class="card-content">
+                            {{$solicitud->fecha_compromiso}}
                         </p>
                     </div>
                     <div class="col-md-12">

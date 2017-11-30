@@ -147,6 +147,49 @@ class SolicitudController extends Controller
         $solicitud->condicion=$request->get('condicion');
         $solicitud->user_id=Auth::id();
 
+        //DETERMINAR LA ASIGNACION
+        $serv=$request->get('servicio');
+        $cat=$request->get('category');
+        $sub=$request->get('subcategory');
+        $t=$request->get('type');
+
+        // SERVICIO DE TECNOLOGIA
+        if ($serv=1){
+            if ($cat=='1'){
+                if($sub=='CBS'){
+                    if($t==3){
+                        $solicitud->asignacion_primaria='Jacqueline Aponete';
+                        $solicitud->asignacion_secundaria='Newton Burgos';
+                    }else{
+                        $solicitud->asignacion_primaria='Newton Burgos';
+                        $solicitud->asignacion_secundaria='Wilfredo Fermin';
+                    }
+                }else{
+                    $solicitud->asignacion_primaria='Newton Burgos';
+                    $solicitud->asignacion_secundaria='Wilfredo Fermin';
+                }
+
+            }elseif('$cat==2'){
+                $solicitud->asignacion_primaria='Wilfredo Fermin ';
+                $solicitud->asignacion_secundaria='Newton Burgos';
+            }
+
+        }
+
+        //PRIORIDAD DE LA ASIGNACION
+        $ahora=Carbon::now();
+        $prio=$request->get('prioridad');
+
+        if($prio=='Normal'){
+            $solicitud->fecha_compromiso=$ahora->addHours(24);
+        }elseif ($prio=='Alta'){
+            $solicitud->fecha_compromiso=Carbon::today();
+        }else{
+            $solicitud->fecha_compromiso=$ahora->addHours(72);
+        }
+
+
+
 
        // dd($solicitud->service);
 

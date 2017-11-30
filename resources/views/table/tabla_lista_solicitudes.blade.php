@@ -3,11 +3,13 @@
     <thead class="text-primary">
     <tr>
         <th>Id</th>
-        <th>Fecha</th>
+        <th>Fecha registro</th>
+        <th>Fecha compromiso</th>
         <th>Servicio</th>
         <th>Sub Categoria</th>
         <th>Tipo</th>
         <th>Condicion</th>
+        <th>Asignacion</th>
         <th>Descripcion</th>
         <th>Accion</th>
     </tr>
@@ -17,8 +19,11 @@
             {{--ID--}}
             <td width="3%">{{$solicitud->id}}</td>
 
-            {{--FECHA--}}
-            <td width="10%">{{$solicitud->created_at->format('d-m-Y h:i a')}}</td>
+            {{--FECHA REGISTRO--}}
+            <td width="12%">{{$solicitud->created_at->format('d-m-Y h:i a')}}</td>
+
+            {{--FECHA COMPROMISO--}}
+            <td width="12%">{!! \Carbon\Carbon::parse($solicitud->fecha_compromiso)->format('d/m/Y h:i a') !!}</td>
 
             {{--SERVICIO SOLICITADO--}}
             @if($solicitud->servicio==1)
@@ -36,7 +41,7 @@
             @elseif($solicitud->type==2)
                 <td width="10%">Solicutud</td>
             @else
-                <td width="10%">Asistencia</td>
+                <td width="10%">Permiso</td>
             @endif
 
             {{--CONDICION--}}
@@ -50,12 +55,15 @@
                 <td width="10%"><span class="label label-danger">Rechazado</span></td>
             @endif
 
+            {{--ASIGNACION PRIMARIA--}}
+            <td width="10%">{{$solicitud->asignacion_primaria}}</td>
+
             {{--DESCRIPCION con limitante de caracteres--}}
-            <td width="40%">{{str_limit($solicitud->description, 90)}}</td>
+            <td width="30%">{{str_limit($solicitud->description, 70)}}</td>
 
             <td class="td-actions text-right">
                 {{--EDITAR--}}
-                <a href="{{URL::action('SolicitudController@edit',$solicitud->id )}}" type="button" rel="tooltip" title="Editar solicitud" class="btn btn-success btn-simple btn-xs">
+                <a href="{{URL::action('SolicitudController@edit',$solicitud->id )}}" type="button" rel="tooltip" title="Ver o Editar" class="btn btn-success btn-simple btn-xs">
                     <i class="fa fa-edit"></i>
                 </a>
                 <a>

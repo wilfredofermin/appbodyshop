@@ -18,14 +18,18 @@ class CreateDbrequestsTable extends Migration
             $table->integer('estado')->default(1);
             $table->integer('condicion')->default(3);// 4:DECLINADO | 3 :PENDIENTE | 2 :EN PROCESO | 1 :COMPLETADO
             $table->integer('servicio');
-            $table->string('description');
+            $table->text('description');
             $table->string('ubicacion');
             $table->string('category');
             $table->string('subcategory');
             $table->string('area');
             $table->integer('type'); // 1 : PROBLEMA | 2 : SOLICITUD | 3 : ASISTENCIA
             $table->string('prioridad');
-            $table->string('imagen')->default('img/soporte.png');
+            $table->string('imagen')->default('img/image.gif');
+            $table->dateTime('fecha_compromiso')->nullable();
+            $table->string('asignacion_primaria')->nullable();
+            $table->string('asignacion_secundaria')->nullable();
+            $table->text('comentario')->nullable();
 
             $table->timestamps();
 
