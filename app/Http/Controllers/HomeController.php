@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Gerenica;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -32,12 +33,10 @@ class HomeController extends Controller
         $areas=Gerenica::where ('tipo',3)->where('estado',1)->get();//AREAS
         $services=Service::where('estado',1)->get();
 
+        Session::flash('bienvenido', 'My message');
         return view('home')->with(compact('sucursales','services','areas','complit'));
     }
 
-    public function solicitudes(){
 
-
-    }
 }
 

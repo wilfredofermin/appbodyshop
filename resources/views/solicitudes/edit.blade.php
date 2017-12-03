@@ -199,8 +199,8 @@
         <div class="content">
             <div class="card card-profile">
                 <div align="center">
-                    <a href="{{url($solicitud->imagen)}}">
-                        <img src="{{asset($solicitud->imagen)}}"  class="img-responsive" alt="imagen" style="width:auto;  height:240px;" >
+                    <a href="{{url('img/solicitudes/'.$solicitud->imagen)}}">
+                        <img src="{{asset('img/solicitudes/'.$solicitud->imagen)}}"  class="img-responsive" alt="imagen" style="width:auto;  height:240px;" >
                     </a>
                 </div>
             </div>

@@ -5,7 +5,9 @@
                 <thead class="text-primary">
                     <tr>
                         <th>Id</th>
-                        <th>Fecha</th>
+                        <th>Fecha solicitud</th>
+                        <th>Fecha compromiso</th>
+                        <th>Fecha atencion</th>
                         <th>Condicion</th>
                         <th>Prioridad</th>
                         <th>Ubicacion</th>
@@ -18,8 +20,12 @@
                 </thead>
                 <tfoot>
                         <!-- Button trigger modal -->
-                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-placement="right" rel="tooltip" title="Ver el estado de tus solicitudes">
-                            <i class="fa fa-eye" aria-hidden="true"></i> Estados</a>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-placement="right" rel="tooltip" title="Solicitudes recientes atendidas">
+                            <i class="fa fa-eye" aria-hidden="true"></i> Estados recientes</a>
+                        </button>
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-success btn-xs"  data-placement="right" rel="tooltip" title="Ver todas tu solicitudes atendidas">
+                            <i class="fa fa-list" aria-hidden="true"></i> Ver todas</a>
                         </button>
                 </tfoot>
                 <tbody>
@@ -29,54 +35,62 @@
                         {{--ID--}}
                         <td width="3%">{{$com->id}}</td>
 
-                        {{--FECHA--}}
-                        <td width="10%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
+                        {{--FECHA SOLICITUD--}}
+                        <td width="7%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
+
+                        {{--FECHA COMPROMISO--}}
+                        <td width="7%">{!! \Carbon\Carbon::parse($com->fecha_compromiso)->format('d/m/Y h:i a') !!}</td>
+
+                        {{--FECHA ATENCION--}}
+                        <td width="7%">{{$com->updated_at->format('d-m-Y h:i a')}}</td>
 
                         {{--CONDICION--}}
                         @if($com->condicion==1)
-                            <td width="7%"><span class="label label-success">Completo</span></td>
+                            <td width="5%"><span class="label label-success">Completo</span></td>
                         @elseif($com->condicion==2)
-                            <td width="7%"><span class="label label-primary">En Proceso</span></td>
+                            <td width="5%"><span class="label label-primary">En Proceso</span></td>
+                        @elseif($com->condicion==5)
+                            <td width="5%"><span class="label label-warning">Vencido</span></td>
                         @else
-                            <td width="7%"><span class="label label-danger">Rechazado</span></td>
+                            <td width="5%"><span class="label label-danger">Rechazado</span></td>
                         @endif
 
                         {{--PRIORIDAD--}}
-                        <td width="10%">{{$com->prioridad}}</td>
+                        <td width="5%">{{$com->prioridad}}</td>
 
                         {{--UBICACION--}}
-                        <td width="10%">{{$com->ubicacion}}</td>
+                        <td width="5%">{{$com->ubicacion}}</td>
 
                         {{--SERVICIO SOLICITADO--}}
                         @if($com->servicio==1)
-                            <td width="10%">Tecnologia</td>
+                            <td width="5%">Tecnologia</td>
                         @else
-                            <td width="10%">Servicios generales</td>
+                            <td width="5%">Servicios generales</td>
                         @endif
 
                         {{--CATEGORIA--}}
                         @if($com->category==1)
-                            <td width="10%">Software</td>
+                            <td width="7%">Software</td>
                         @elseif($com->category==2)
-                            <td width="10%">Infraestructura IT</td>
+                            <td width="7%">Infraestructura IT</td>
                             @else
-                            <td width="10%">Servicios Generales</td>
+                            <td width="7%">Servicios Generales</td>
                         @endif
 
                         {{--SUB CATEGORIA--}}
-                        <td width="10%">{{$com->subcategory}}</td>
+                        <td width="7%">{{$com->subcategory}}</td>
 
                         {{--TIPO--}}
                         @if($com->type==1)
-                            <td width="10%">Problema</td>
+                            <td width="5%">Problema</td>
                         @elseif($com->type==2)
-                            <td width="10%">Solicutud</td>
+                            <td width="5%">Solicutud</td>
                         @else
-                            <td width="10%">Asistencia</td>
+                            <td width="5%">Asistencia</td>
                         @endif
 
                         {{--ASIGNADO--}}
-                        <td width="10%">Wilfredo Fermin</td>
+                        <td width="10%">{{$com->asignacion_primaria}}</td>
                     </tr>
                     @endforeach
                 </tbody>

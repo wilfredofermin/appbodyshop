@@ -5,9 +5,9 @@
                 <thead class="text-primary">
                     <tr>
                         <th>Id</th>
-                        <th>Fecha</th>
+                        <th>Fecha compromiso</th>
+                        <th>Fecha atencion</th>
                         <th>Condicion</th>
-                        <th>Categoria</th>
                         <th>Sub Categoria</th>
                         <th>Tipo</th>
                         <th>Asignado a</th>
@@ -19,8 +19,11 @@
                         {{--ID--}}
                         <td width="5%">{{$com->id}}</td>
 
+                        {{--FECHA COMPROMISO--}}
+                        <td width="10%">{!! \Carbon\Carbon::parse($com->fecha_compromiso)->format('d/m/Y') !!}</td>
+
                         {{--FECHA--}}
-                        <td width="8%">{{$com->created_at->format('d-m-Y')}}</td>
+                        <td width="8%">{{$com->updated_at->format('d-m-Y')}}</td>
 
                         {{--CONDICION--}}
                         @if($com->condicion==1)
@@ -31,6 +34,7 @@
                             <td width="7%"><span class="label label-danger">Rechazado</span></td>
                         @endif
 
+                       <!--
                         {{--CATEGORIA--}}
                         @if($com->category==1)
                             <td width="10%">Software</td>
@@ -39,6 +43,7 @@
                             @else
                             <td width="10%">Servicios Generales</td>
                         @endif
+                        -->
 
                         {{--SUB CATEGORIA--}}
                         <td width="10%">{{$com->subcategory}}</td>
@@ -53,7 +58,7 @@
                         @endif
 
                         {{--ASIGNADO--}}
-                        <td width="10%">Wilfredo Fermin</td>
+                        <td width="10%">{{$com->asignacion_primaria}}</td>
                     </tr>
                     @endforeach
                 </tbody>

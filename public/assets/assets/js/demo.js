@@ -166,7 +166,7 @@ demo = {
 
     	$.notify({
         	icon: "notifications",
-        	message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+        	message: "Welcome to <b>BS CONTROL</b> - Desarrollo avanzado de sistemas."
 
         },{
             type: type[color],
@@ -177,7 +177,6 @@ demo = {
             }
         });
 	}
-
 
 
 }

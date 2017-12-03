@@ -25,7 +25,7 @@
             toastr.error("{{ Session::get('message') }}");
             break;
         case 'bienvenido':
-            toastr["info"]("Bienvenido !", "{!! Auth::user()->name !!}",{positionClass: "toast-bottom-right",progressBar:true})
+            toastr["success"]("BSCONTROL le da la bienvenida !", "{!! Auth::user()->name !!}",{positionClass: "toast-bottom-center",progressBar:true})
             break;
         case 'create_solicitud':
             toastr["success"]("La solicitud ha sido creada exitosamente !", "SOLICITUD NUEVA",{positionClass: "toast-top-right"})

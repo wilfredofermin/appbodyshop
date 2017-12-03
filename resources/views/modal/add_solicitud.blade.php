@@ -67,8 +67,8 @@
                                                             <label class="control-label"><i class="material-icons">low_priority</i> Nivel de urgencia</label>
                                                             <select name="prioridad" class="form-control">
                                                                 <option value="Normal"> Normal</option>
-                                                                <option value="Bajo">Baja</option>
-                                                                <option value="Alto">Alta</option>
+                                                                <option value="Baja">Baja</option>
+                                                                <option value="Alta">Alta</option>
                                                             </select>
                                                         </div>
                                                     </div>

@@ -40,6 +40,11 @@
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
 
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{{asset('assets/css/demo.css')}}" rel="stylesheet" />
+
+
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons" rel="stylesheet" type="text/css">
@@ -52,7 +57,7 @@
 
 </head>
 
-<body>
+<body onload="demo.showNotification('top','left')">
 
 <div class="wrapper" >
     <div class="sidebar" data-color="purple" data-image="{{asset('img/basket.jpg')}}">
@@ -76,19 +81,27 @@
                 <li class="@yield('home','active')">
                     <a href="{{url('/home')}}">
                         <i class="material-icons">dashboard</i>
-                        <p>Dashboard</p>
+                        <p>DASHBOARD</p>
                     </a>
                 <li class="@yield('solicitud')">
                     <a href="{{url('/solicitud')}}">
                         <i class="material-icons">assignment_turned_in</i>
-                        <p>Solicitudes</p>
+                        <p>SOLICITUD</p>
                     </a>
                 </li>
                 @if (Auth::user()->is_admin)
                     <li class="@yield('peticiones')">
-                        <a href="{{url('/petinciones')}}">
+                        <a href="{{url('/peticion')}}">
                             <i class="material-icons">assignment_turned_in</i>
-                            <p>Pertiiones</p>
+                            <p>PETICIONES</p>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->is_admin)
+                    <li class="@yield('administrar')">
+                        <a href="{{url('/administrar')}}">
+                            <i class="material-icons">assignment_turned_in</i>
+                            <p>ADMINISTRAR</p>
                         </a>
                     </li>
                 @endif
@@ -171,53 +184,47 @@
     </div>
 
 </div>
+
 @include('modal.show_complit')
 @include('modal.add_solicitud')
 @include('include.notifications.sweet_alert')
 @include('modal.delete_solicitud')
+
 
 <!-- SweetAlert | Condiciones para mensajes -->
 </body>
 
 
 <!--   Core JS Files   -->
-
-
 <script src="{{asset('assets/js/jquery-3.1.0.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/material.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/jquery.bootstrap.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/dknotus-tour.min.js')}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js" type="text/javascript"></script>
-
 <script src="{{asset('assets/js/chartist.min.js')}}"></script>
 <!--  Charts Plugin -->
-
-
 <!--  Notifications Plugin    -->
 <script src="{{asset('assets/js/bootstrap-notify.js')}}"></script>
-
 <!--  Google Maps Plugin    -->
 {{--SweeAlert2 | https://cdn.jsdelivr.net/sweetalert2/6.6.2/sweetalert2.js --}}
 <script src="{{asset('js/sweetalert2.js')}}"></script>
-
 <!-- Material Dashboard javascript methods -->
 <script src="{{asset('assets/js/material-dashboard.js')}}"></script>
-
 <!-- Toastr Notification | http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js -->
 <script src="{{asset('dist/js/toastr.min.js')}}"></script>
-
-
 <!--  Plugin for the Wizard -->
 <script src="{{asset('assets/js/material-bootstrap-wizard.js')}}"></script>
-
-
-
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
+<script src="{{asset('assets/js/demo.js')}}"></script>
 
-<!--  NOTIFICACIONES TOASTR DEL SISTEMA-->
+    <!--  NOTIFICACIONES NOTIFY BIENVENIDA || http://bootstrap-notify.remabledesigns.com/ -->
+@include('include.notifications.notify-bienvenido')
+
+    <!--  NOTIFICACIONES TOASTR DEL SISTEMA-->
 @include('include.notifications.toastr_notifications')
+
 
 <!--  TOUR DEL SISTEMA -->
 <script>
@@ -365,7 +372,16 @@
         $("#select-category").focus();
     });
 </script>
-
+{{--TAB MENU ADMIN--}}
+<script>
+    $(document).ready(function() {
+        $(".btn-pref .btn").click(function () {
+            $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+            // $(".tab").addClass("active"); // instead of this do the below
+            $(this).removeClass("btn-default").addClass("btn-primary");
+        });
+    });
+</script>
 
 </html>
 

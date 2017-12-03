@@ -25,7 +25,7 @@ class CreateDbrequestsTable extends Migration
             $table->string('area');
             $table->integer('type'); // 1 : PROBLEMA | 2 : SOLICITUD | 3 : ASISTENCIA
             $table->string('prioridad');
-            $table->string('imagen')->default('img/image.gif');
+            $table->string('imagen')->default('image.gif');
             $table->dateTime('fecha_compromiso')->nullable();
             $table->string('asignacion_primaria')->nullable();
             $table->string('asignacion_secundaria')->nullable();

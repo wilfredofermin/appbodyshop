@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/solicitud','SolicitudController');
 
+Route::get('/peticion','PeticionesController@index');
+
+Route::get('/administrar','AdminController@index');
+
 //API DE SERVICIOS
 Route::get('/solicitud/{id}/category', 'SolicitudController@byCategory');
 Route::get('/solicitud/{id}/subcategory', 'SolicitudController@bySubCategory');

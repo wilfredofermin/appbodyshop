@@ -13,21 +13,39 @@ use App\Dbrequest;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 
 
 class SolicitudController extends Controller
 {
 
-    //  NOTIFICACIONES DEL SISTEMA
+    //  NOTIFICACIONES DEL SISTEMA Y REDIREECION SEGUN SU ROLL
     public function notification(){
         $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',1)->orderBy('created_at','desc')->get();
+
         $notification = array(
-            'message' => 'Bienvendo'." ".Auth::user()->name,
+            'message' => ''." ".Auth::user()->name,
             'alert-type' => 'bienvenido'
         );
         //session()->flash('notification',$notification);
-        return redirect('/home')->with($notification,$complit);
+
+        //REDICCIONES DEL SISTEMA ///////////////////////////////////////
+        if (Auth::user()->is_admin){
+            Session::flash('bienvenido');
+
+            return redirect('/home');
+            //return redirect('/home')->with($notification,$complit);
+        }elseif(Auth::user()->is_client){
+            Session::flash('bienvenido');
+            return redirect('/home');
+            //return redirect('/solicitud')->with($notification,$complit);
+        }else{
+            Session::flash('bienvenido');
+            return redirect('/home');
+            //return redirect('/peticion')->with($notification,$complit);
+        }
+
     }
 
     public function __construct()
@@ -84,6 +102,7 @@ class SolicitudController extends Controller
 
             //SOLITUDES COMPLETADAS Y EN PROCESO | 1 : COMPLETADO | 2 : EN PROCESO
             $completos=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->take(3)->orderBy('updated_at','asc')->get();
+            //dd($completos);
             $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->orderBy('updated_at','asc')->get();
             ///CONTEO INDIVIDUAL /////////////////////////////////////////////////////
 
@@ -98,6 +117,8 @@ class SolicitudController extends Controller
             //SOLITUDES RECHAZADA
             $c_rechazados = Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',4)->count();
 
+          // dd($c_vencidas);
+
             //ULTIMA DATOS /////////////////////////////////
             //$a_ultimamodificacion=Dbrequest::where('user_id',Auth::id())->firt(1); // PRIMERO
 
@@ -105,8 +126,8 @@ class SolicitudController extends Controller
 
             //$fecha_compromiso=Carbon::now();
            //$fecha_compromiso->addDays(2);
-
             //$today=Carbon::today();
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             return view('solicitudes.index')->with(compact('categories','sucursales','services','areas',
@@ -164,10 +185,7 @@ class SolicitudController extends Controller
                         $solicitud->asignacion_primaria='Newton Burgos';
                         $solicitud->asignacion_secundaria='Wilfredo Fermin';
                     }
-                }else{
-                    $solicitud->asignacion_primaria='Newton Burgos';
-                    $solicitud->asignacion_secundaria='Wilfredo Fermin';
-                }
+                }else{}
 
             }elseif('$cat==2'){
                 $solicitud->asignacion_primaria='Wilfredo Fermin ';
@@ -183,7 +201,7 @@ class SolicitudController extends Controller
         if($prio=='Normal'){
             $solicitud->fecha_compromiso=$ahora->addHours(24);
         }elseif ($prio=='Alta'){
-            $solicitud->fecha_compromiso=Carbon::today();
+            $solicitud->fecha_compromiso=$ahora->addHours(4);
         }else{
             $solicitud->fecha_compromiso=$ahora->addHours(72);
         }
@@ -213,6 +231,7 @@ class SolicitudController extends Controller
                 'message' => 'Solicutud completada exitosamente',
                 'alert-type' => 'create_solicitud'
             );
+            //Session::flash('guardar', 'My message');
             //session()->flash('notification',$notification);
             return redirect('/solicitud')->with($notification);
 
@@ -220,13 +239,14 @@ class SolicitudController extends Controller
             //De lo contrario realiza los siguien | Esto permite guardar sin tener que cambiar la imagen actual.
             $solicitud->save();
 
+            //Aqui envio la notificacion del cambio realizado.
             $notification = array(
                 'message' => 'Solicutud completada exitosamente',
                 'alert-type' => 'create_solicitud'
             );
+            //Session::flash('guardar', 'My message');
             //session()->flash('notification',$notification);
-            return redirect('/solicitud')->with(compact('notification'));
-
+            return redirect('/solicitud')->with($notification);
         }
     }
 
