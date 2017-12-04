@@ -20,34 +20,6 @@ use Intervention\Image\Facades\Image;
 class SolicitudController extends Controller
 {
 
-    //  NOTIFICACIONES DEL SISTEMA Y REDIREECION SEGUN SU ROLL
-    public function notification(){
-        $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',1)->orderBy('created_at','desc')->get();
-
-        $notification = array(
-            'message' => ''." ".Auth::user()->name,
-            'alert-type' => 'bienvenido'
-        );
-        //session()->flash('notification',$notification);
-
-        //REDICCIONES DEL SISTEMA ///////////////////////////////////////
-        if (Auth::user()->is_admin){
-            Session::flash('bienvenido');
-
-            return redirect('/home');
-            //return redirect('/home')->with($notification,$complit);
-        }elseif(Auth::user()->is_client){
-            Session::flash('bienvenido');
-            return redirect('/home');
-            //return redirect('/solicitud')->with($notification,$complit);
-        }else{
-            Session::flash('bienvenido');
-            return redirect('/home');
-            //return redirect('/peticion')->with($notification,$complit);
-        }
-
-    }
-
     public function __construct()
     {
         $this->middleware('auth');

@@ -3,7 +3,7 @@
     <script>
         $.notify({
             icon: 'img/'+'{{Auth::user()->avatar}}',
-            title: '<strong>{{Auth::user()->name}}</strong>',
+            title: 'Hola, <strong>{{Auth::user()->name}}</strong>',
             message: 'BSCONTROL Le da la bienvenida'
         },{
             type: 'minimalist',

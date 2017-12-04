@@ -22,9 +22,9 @@ class User extends Authenticatable
     }
     public function getIsSupportAttribute()
     {
-        return $this->role==2; // Es un Supervisor o Soporte | is_support
+        return $this->role==2; // Es un Supervisor o Soporte | is_soporte
     }
-    public function getIsEvaluadorAttribute()
+    public function getIsEvaluatorAttribute()
     {
         return $this->role==3; // Es un Client | is_evaluador
     }

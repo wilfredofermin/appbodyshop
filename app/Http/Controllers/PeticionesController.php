@@ -8,12 +8,13 @@ use App\Gerenica;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PeticionesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('peticiones');
     }
 
     public function index(Request $request)
@@ -92,6 +93,7 @@ class PeticionesController extends Controller
 
         //$today=Carbon::today();
             ////////////////////////////////////////////////////////////////////////////////////////////////////
+        //Session::flash('bienvenido','');
         return view('peticiones.index')->with(compact('categories','sucursales','services','areas',
                 'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText','c_en_proceso','m_solicitudes')
         );

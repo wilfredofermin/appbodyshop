@@ -33,7 +33,7 @@ class HomeController extends Controller
         $areas=Gerenica::where ('tipo',3)->where('estado',1)->get();//AREAS
         $services=Service::where('estado',1)->get();
 
-        Session::flash('bienvenido', 'My message');
+        //Session::flash('bienvenido','');
         return view('home')->with(compact('sucursales','services','areas','complit'));
     }
 
