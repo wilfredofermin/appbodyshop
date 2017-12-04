@@ -80,7 +80,7 @@
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </div>
                         <div class="card-content">
-                            <p class="category">RECHAZADOS</p>
+                            <p class="category">VENCIDOS</p>
                             <h3 class="title">{{$c_rechazados}}</h3>
                         </div>
                         <div class="card-footer">
@@ -103,7 +103,7 @@
             <div class="card-content table-responsive">
                 {{--INCLUYENDO LAS TABLAS DE LAS SOLITUDES--}}
                 @if($c_solicitudes<>null)
-                    @include('table.tabla_lista_solicitudes')
+                    @include('solicitudes.table.tabla_lista_solicitudes')
                 @else
                    <div align="center">
                        <h4><span class="tim-note"></span>AUN NO EXISTEN DATOS REGISTRADOS</h4>
@@ -120,8 +120,8 @@
 @section('modal')
 
 @endsection
-@if ($completos!=null)
-    @include('table.tabla_lista_estados')
+@if ($sumar_condicion!=null)
+    @include('solicitudes.table.tabla_lista_estados')
 @endif
 
 @include('solicitudes.include.button-float')

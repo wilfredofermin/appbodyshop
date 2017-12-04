@@ -57,7 +57,7 @@
 
 </head>
 
-<body onload="demo.showNotification('top','left')">
+<body>
 
 <div class="wrapper" >
     <div class="sidebar" data-color="purple" data-image="{{asset('img/basket.jpg')}}">
@@ -89,7 +89,8 @@
                         <p>SOLICITUD</p>
                     </a>
                 </li>
-                @if (Auth::user()->is_support)
+
+                @if (Auth::user()->is_support || Auth::user()->is_admin )
                     <li class="@yield('peticiones')">
                         <a href="{{url('/peticion')}}">
                             <i class="material-icons">assignment_turned_in</i>

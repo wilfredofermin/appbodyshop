@@ -89,7 +89,9 @@ class SolicitudController extends Controller
             //SOLITUDES RECHAZADA
             $c_rechazados = Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',4)->count();
 
-          // dd($c_vencidas);
+            $sumar_condicion=($c_completo)+($c_en_proceso)+($c_rechazados);
+
+           //dd($suma);
 
             //ULTIMA DATOS /////////////////////////////////
             //$a_ultimamodificacion=Dbrequest::where('user_id',Auth::id())->firt(1); // PRIMERO
@@ -103,7 +105,7 @@ class SolicitudController extends Controller
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             return view('solicitudes.index')->with(compact('categories','sucursales','services','areas',
-                'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText','c_en_proceso','m_solicitudes')
+                'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText','c_en_proceso','m_solicitudes','sumar_condicion')
             );
         }
     }
