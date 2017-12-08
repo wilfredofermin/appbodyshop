@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Solicitud;
 use App\SubCategory;
+use App\User;
 use Illuminate\Http\Request;
 
+use app\Assign;
 use App\Gerenica;
 use App\Category;
 use App\Service;
@@ -13,6 +15,7 @@ use App\Dbrequest;
 use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
 
@@ -91,6 +94,14 @@ class SolicitudController extends Controller
 
             $sumar_condicion=($c_completo)+($c_en_proceso)+($c_rechazados);
 
+            //SOLICITUDES VENCIDAS
+            $today=Carbon::today();
+            $vencidos = DB::table('dbrequests')->whereDate('fecha_compromiso', $today)->where('estado',1)->get();
+            //$c_vencidos = DB::table('dbrequests')->whereDate('fecha_compromiso', $today)->where('estado',1)->count();
+            DB::table('dbrequests')->whereDate('fecha_compromiso', $today)->where('estado',1)->update(['condicion'=>5]);
+
+            $c_vencidos = Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',5)->count();
+
            //dd($suma);
 
             //ULTIMA DATOS /////////////////////////////////
@@ -102,19 +113,15 @@ class SolicitudController extends Controller
            //$fecha_compromiso->addDays(2);
             //$today=Carbon::today();
 
-
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             return view('solicitudes.index')->with(compact('categories','sucursales','services','areas',
-                'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText','c_en_proceso','m_solicitudes','sumar_condicion')
+                'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText',
+                'c_en_proceso','m_solicitudes','sumar_condicion','c_vencidos')
             );
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
@@ -147,26 +154,17 @@ class SolicitudController extends Controller
         $cat=$request->get('category');
         $sub=$request->get('subcategory');
         $t=$request->get('type');
+       // $ubic=$request->get('ubicacion');
 
-        // SERVICIO DE TECNOLOGIA
-        if ($serv=1){
-            if ($cat=='1'){
-                if($sub=='CBS'){
-                    if($t==3){
-                        $solicitud->asignacion_primaria='Jacqueline Aponete';
-                        $solicitud->asignacion_secundaria='Newton Burgos';
-                    }else{
-                        $solicitud->asignacion_primaria='Newton Burgos';
-                        $solicitud->asignacion_secundaria='Wilfredo Fermin';
-                    }
-                }else{}
-
-            }elseif('$cat==2'){
-                $solicitud->asignacion_primaria='Wilfredo Fermin ';
-                $solicitud->asignacion_secundaria='Newton Burgos';
-            }
-
-        }
+        // QUERY DE ASIGNACION
+              $assing=DB::table('assigns')
+                   ->select('support_id')
+                   ->where('category',$cat)
+                  ->where('type',$t)
+                  ->first();
+               foreach ( $assing as $as){
+                   $solicitud->assign=$as;
+               }
 
         //PRIORIDAD DE LA ASIGNACION
         $ahora=Carbon::now();
@@ -180,10 +178,6 @@ class SolicitudController extends Controller
             $solicitud->fecha_compromiso=$ahora->addHours(72);
         }
 
-
-
-
-       // dd($solicitud->service);
 
         if ($request->imagen != null) {
             $extension = $request->file('imagen')->getClientOriginalExtension();

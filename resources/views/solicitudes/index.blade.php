@@ -77,11 +77,11 @@
                 <div class="col-lg-3 col-md-6 col-sm-6" id="rechazados">
                     <div class="card card-stats">
                         <div class="card-header" data-background-color="red">
-                            <i class="fa fa-times" aria-hidden="true"></i>
+                            <i class="fa fa-thermometer-quarter" aria-hidden="true"></i>
                         </div>
                         <div class="card-content">
                             <p class="category">VENCIDOS</p>
-                            <h3 class="title">{{$c_rechazados}}</h3>
+                            <h3 class="title">{{$c_vencidos}}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">

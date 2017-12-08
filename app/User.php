@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->role==4; // Es un Client | is_client
     }
+
+    public function dbrequests(){
+        return $this->hasMany('App\Dbrequest');
+    }
+
 }

@@ -27,8 +27,7 @@ class CreateDbrequestsTable extends Migration
             $table->string('prioridad');
             $table->string('imagen')->default('image.gif');
             $table->dateTime('fecha_compromiso')->nullable();
-            $table->string('asignacion_primaria')->nullable();
-            $table->string('asignacion_secundaria')->nullable();
+            $table->string('assign')->nullable();
             $table->text('comentario')->nullable();
 
             $table->timestamps();

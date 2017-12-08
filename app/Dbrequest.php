@@ -2,6 +2,7 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class Dbrequest extends Model
@@ -13,4 +14,13 @@ class Dbrequest extends Model
     protected $hidden = [
         'remember_token',
     ];
+
+
+    public function users(){
+
+    return $this->belongsTo('App\User');
+    }
+
+
 }
+
