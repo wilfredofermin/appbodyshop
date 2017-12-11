@@ -16,9 +16,14 @@ class CreateAssignsTable extends Migration
             $table->string('subcategory');
             $table->integer('type');
             $table->string('ubicacion');
-            $table->string('support_id');
+            //Relacion
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+
+
+
     }
 
     public function down()
