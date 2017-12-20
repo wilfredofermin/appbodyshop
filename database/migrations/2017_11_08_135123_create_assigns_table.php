@@ -12,6 +12,7 @@ class CreateAssignsTable extends Migration
         Schema::create('assigns', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('estado')->default(1);
+            $table->string('name');
             $table->integer('category');
             $table->string('subcategory');
             $table->integer('type');

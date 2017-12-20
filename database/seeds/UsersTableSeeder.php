@@ -14,9 +14,9 @@ class UsersTableSeeder extends Seeder
     {
         User::create([
             'estado'=>1,
-            'name'=>'Mariela Mejaa',
-            'email' => 'm.mejia@clubbodyshop.com',
-            'role'=>1,
+            'name'=>'Jacqueline Aponte',
+            'email' => 'j.aponte@clubbodyshop.com',
+            'role'=>2,
             'sucursal'=>'Naco',
             'departament'=>'Gestion Humnana',
             'password' => bcrypt('12345'),

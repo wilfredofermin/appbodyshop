@@ -93,7 +93,7 @@
                 @if (Auth::user()->is_support || Auth::user()->is_admin )
                     <li class="@yield('peticiones')">
                         <a href="{{url('/peticion')}}">
-                            <i class="material-icons">assignment_turned_in</i>
+                            <i class="material-icons">assignment_ind</i>
                             <p>PETICIONES</p>
                         </a>
                     </li>
@@ -101,7 +101,7 @@
                 @if (Auth::user()->is_admin)
                     <li class="@yield('administrar')">
                         <a href="{{url('/administrar')}}">
-                            <i class="material-icons">assignment_turned_in</i>
+                            <i class="material-icons">build</i>
                             <p>ADMINISTRAR</p>
                         </a>
                     </li>
@@ -185,9 +185,8 @@
     </div>
 
 </div>
+@yield('modal')
 
-@include('modal.show_complit')
-@include('modal.add_solicitud')
 @include('include.notifications.sweet_alert')
 @include('modal.delete_solicitud')
 

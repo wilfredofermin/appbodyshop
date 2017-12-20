@@ -56,7 +56,17 @@
             @endif
 
             {{--ASIGNACION PRIMARIA--}}
-            <td width="10%">{{$solicitud->asignacion_primaria}}</td>
+
+            @if($solicitud->assign->id==1)
+                <td width="10%">Supervision</td>
+                @elseif($solicitud->assign->id==2)
+                <td width="10%">Soporte</td>
+                @else
+                <td width="10%">Desarrollo</td>
+            @endif
+            {{--
+             <td width="30%">{{$solicitud->assign->id}}</td>
+            --}}
 
             {{--DESCRIPCION con limitante de caracteres--}}
             <td width="30%">{{str_limit($solicitud->description, 70)}}</td>

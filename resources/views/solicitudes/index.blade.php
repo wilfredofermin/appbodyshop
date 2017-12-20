@@ -116,6 +116,10 @@
             </div>
         </div>
     </div>
+    @section('modal')
+    @include('modal.show_complit')
+    @include('modal.add_solicitud')
+    @endsection
 
 @section('modal')
 

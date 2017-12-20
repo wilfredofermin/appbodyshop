@@ -127,12 +127,6 @@ class SolicitudController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
        // dd($request);
@@ -158,12 +152,12 @@ class SolicitudController extends Controller
 
         // QUERY DE ASIGNACION
               $assing=DB::table('assigns')
-                   ->select('support_id')
+                   ->select('user_id')
                    ->where('category',$cat)
                   ->where('type',$t)
                   ->first();
                foreach ( $assing as $as){
-                   $solicitud->assign=$as;
+                   $solicitud->assign_id=$as;
                }
 
         //PRIORIDAD DE LA ASIGNACION
@@ -239,6 +233,16 @@ class SolicitudController extends Controller
     {
         $solicitud=Dbrequest::find($id);
 
+        $b_asignado=$solicitud->assign->id; // CON ESTO OBTENGO EL ID DEL ASIGNADO
+
+        $asignado=User::where('id',$b_asignado)->select('name')->get(); // AQUI HAGO LA CONSULTA - ESTO ME TRAE UN ARRAY DE DATOS
+
+
+        //$n_asign=$asign->name;
+
+        //dd($asignado);
+
+
         $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->orderBy('updated_at','asc')->get();
 
         //SUCURSALES
@@ -254,7 +258,7 @@ class SolicitudController extends Controller
         //CATEGORIA
         $categories=Category::all();
 
-        return view('solicitudes.edit')->with(compact('complit','solicitud','sucursales','services','areas','categories'));
+        return view('solicitudes.edit')->with(compact('complit','solicitud','sucursales','services','areas','categories','asignado'));
     }
 
     /**

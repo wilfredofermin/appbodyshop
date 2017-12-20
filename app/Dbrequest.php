@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class Dbrequest extends Model
@@ -16,9 +15,12 @@ class Dbrequest extends Model
     ];
 
 
-    public function users(){
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
-    return $this->belongsTo('App\User');
+    public function assign(){
+        return $this->belongsTo(Assign::class);
     }
 
 

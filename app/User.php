@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Assign;
 
 class User extends Authenticatable
 {
@@ -36,5 +37,9 @@ class User extends Authenticatable
     public function dbrequests(){
         return $this->hasMany('App\Dbrequest');
     }
+    public function assign(){
+        return $this->hasMany(Assign::class);
+    }
+
 
 }

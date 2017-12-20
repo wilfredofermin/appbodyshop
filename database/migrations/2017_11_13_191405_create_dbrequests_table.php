@@ -27,7 +27,6 @@ class CreateDbrequestsTable extends Migration
             $table->string('prioridad');
             $table->string('imagen')->default('image.gif');
             $table->dateTime('fecha_compromiso')->nullable();
-            $table->string('assign')->nullable();
             $table->text('comentario')->nullable();
 
             $table->timestamps();
@@ -35,6 +34,10 @@ class CreateDbrequestsTable extends Migration
             //USER
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
+
+            //USER
+            $table->integer('assign_id')->unsigned()->nullable();
+            $table->foreign('assign_id')->references('id')->on('assigns');
 
         });
     }

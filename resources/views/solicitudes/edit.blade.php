@@ -199,8 +199,8 @@
         <div class="content">
             <div class="card card-profile">
                 <div align="center">
-                    <a href="{{url($solicitud->imagen)}}">
-                        <img src="{{asset($solicitud->imagen)}}"  class="img-responsive" alt="imagen" style="width:auto;  height:240px;" >
+                    <a href="{{url('/img/solicitudes/'.$solicitud->imagen)}}">
+                        <img src="{{asset('/img/solicitudes/'.$solicitud->imagen)}}"  class="img-responsive" alt="imagen" style="width:auto;  height:240px;" >
                     </a>
                 </div>
             </div>
@@ -272,18 +272,27 @@
             </div>
 
             <div  align="center">
+                <div class="col-md-12">
                 <hr width="90%"><!--separdor-->
-                @if(($solicitud->type)===1)
-                    <img src="{{asset('img/warning.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
-                    PROBLEMA
-                @elseif(($solicitud->type)===2)
-                    <img src="{{asset('img/solicitud.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
-                    SOLICITUD
-                @else
-                    <img src="{{asset('img/success.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
-                    PERMISO
-                @endif
-
+                    <div class="col-md-6">
+                        @if(($solicitud->type)===1)
+                            <img src="{{asset('img/warning.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
+                            PROBLEMA
+                        @elseif(($solicitud->type)===2)
+                            <img src="{{asset('img/solicitud.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
+                            SOLICITUD
+                        @else
+                            <img src="{{asset('img/success.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
+                            PERMISO
+                        @endif
+                    </div>
+                    <div class="col-md-6">
+                      @foreach($asignado as $as)
+                            <img src="{{asset('img/hand.png')}}" class="img-responsive" alt="Cinque Terre" style="width:32px;">
+                            {{$as->name}}
+                       @endforeach
+                    </div>
+                </div>
                 <hr width="90%"><!--separdor-->
                 <a href="{{url('/solicitud')}}" class="btn btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i>   Regresar</a>
             </div>
