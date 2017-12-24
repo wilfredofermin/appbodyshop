@@ -69,7 +69,14 @@
                         @endif
 
                         {{--ASIGNADO--}}
-                        <td width="10%">Wilfredo Fermin</td>
+
+                        @if($com->assign->id==1)
+                            <td width="10%">Supervision</td>
+                        @elseif($com->assign->id==2)
+                            <td width="10%">Soporte</td>
+                        @else
+                            <td width="10%">Desarrollo</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

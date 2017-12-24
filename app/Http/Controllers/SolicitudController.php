@@ -284,6 +284,23 @@ class SolicitudController extends Controller
         $solicitud->condicion=$request->get('condicion');
         $solicitud->user_id=Auth::id();
 
+        //DETERMINAR LA ASIGNACION
+        $serv=$request->get('servicio');
+        $cat=$request->get('category');
+        $sub=$request->get('subcategory');
+        $t=$request->get('type');
+        // $ubic=$request->get('ubicacion');
+
+        // QUERY DE ASIGNACION
+        $assing=DB::table('assigns')
+            ->select('user_id')
+            ->where('category',$cat)
+            ->where('type',$t)
+            ->first();
+        foreach ( $assing as $as){
+            $solicitud->assign_id=$as;
+        }
+
         // dd($solicitud->service);
 
         if ($request->imagen != null) {

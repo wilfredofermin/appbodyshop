@@ -36,13 +36,13 @@
                         <td width="3%">{{$com->id}}</td>
 
                         {{--FECHA SOLICITUD--}}
-                        <td width="7%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
+                        <td width="9%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
 
                         {{--FECHA COMPROMISO--}}
-                        <td width="7%">{!! \Carbon\Carbon::parse($com->fecha_compromiso)->format('d/m/Y h:i a') !!}</td>
+                        <td width="9%">{!! \Carbon\Carbon::parse($com->fecha_compromiso)->format('d/m/Y h:i a') !!}</td>
 
                         {{--FECHA ATENCION--}}
-                        <td width="7%">{{$com->updated_at->format('d-m-Y h:i a')}}</td>
+                        <td width="9%">{{$com->updated_at->format('d-m-Y h:i a')}}</td>
 
                         {{--CONDICION--}}
                         @if($com->condicion==1)
@@ -90,7 +90,14 @@
                         @endif
 
                         {{--ASIGNADO--}}
-                        <td width="10%">{{$com->asignacion_primaria}}</td>
+
+                        @if($com->assign->id==1)
+                            <td width="10%">Supervision</td>
+                        @elseif($com->assign->id==2)
+                            <td width="10%">Soporte</td>
+                        @else
+                            <td width="10%">Desarrollo</td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

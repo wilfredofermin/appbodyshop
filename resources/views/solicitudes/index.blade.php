@@ -119,6 +119,7 @@
     @section('modal')
     @include('modal.show_complit')
     @include('modal.add_solicitud')
+    @include('modal.delete_solicitud')
     @endsection
 
 @section('modal')

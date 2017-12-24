@@ -30,7 +30,7 @@
                     <td>Permiso</td>
                 @endif
                 <td>{{$pendiente->user->name}}</td>
-                <td>Niger</td>
+               <td><img src="{{asset('/img/solicitudes/'.$pendiente->imagen)}}"  class="img-responsive imagen" alt="imagen" style="width:auto;  height:32px;" ></td>
                 <td>Niger</td>
 
             </tr>
@@ -38,4 +38,5 @@
             </tbody>
         </table>
     </div>
+
 </div>

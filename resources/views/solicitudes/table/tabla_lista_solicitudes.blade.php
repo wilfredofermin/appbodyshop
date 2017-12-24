@@ -64,9 +64,6 @@
                 @else
                 <td width="10%">Desarrollo</td>
             @endif
-            {{--
-             <td width="30%">{{$solicitud->assign->id}}</td>
-            --}}
 
             {{--DESCRIPCION con limitante de caracteres--}}
             <td width="30%">{{str_limit($solicitud->description, 70)}}</td>
@@ -94,4 +91,5 @@
     {{ $solicitudes->links() }}
 
 </div>
+
 

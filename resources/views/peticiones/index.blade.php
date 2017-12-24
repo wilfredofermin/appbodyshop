@@ -4,6 +4,18 @@
 @section('solicitud','')
 @section('peticiones','active')
 
+{{--Incluyendo el Javascript--}}
+@section('script')
+@include('peticiones.js.script')
+@endsection
+
+{{--Incluyendo el CSS--}}
+@section('css')
+@include('peticiones.css.css_tabs')
+@endsection
+
+
+
 <!-- Search Bar -->
 @section('buscador')
     {!! Form::open(array('url'=>'/peticion','method'=>'GET','autocomplete'=>'off','role'=>'search','id'=>'search-form','class'=>'navbar-form navbar-right')) !!}
@@ -17,6 +29,8 @@
     {!! Form::close() !!}
 @endsection
 <!-- End Search Bar -->
+
+    {{--Incluyendo el contendo --}}
 @section('content')
 
     <div class="content">
@@ -89,19 +103,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 col-md-12">
-                   @include('peticiones.table.alta_venvidas')
-                </div>
-                <div class="col-lg-8 col-md-12">
-                    @include('peticiones.table.pendientes')
-                </div>
-                <div class="col-lg-4 col-md-12">
-                    @include('peticiones.table.atendidas')
-                </div>
+                @include('peticiones.tabs.tabs')
             </div>
         </div>
+        @section('modal')
+            @include('modal.modal_imagen')
+        @endsection
     </div>
-
 
 
 @endsection
