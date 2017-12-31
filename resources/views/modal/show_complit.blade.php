@@ -10,7 +10,7 @@
                         </div>
                         <div class="card-content table-responsive">
                             @if ($complit<>null)
-                            @include('solicitudes.table.tabla_lista_estados_modal')
+                            @include('incidencias.solicitudes.table.tabla_lista_estados_modal')
                             @endif
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default btn-simple" data-dismiss="modal">Cerrar</button>

@@ -33,13 +33,13 @@
                 </ul>
                 <div class="tab-content col-md-11">
                     <div class="tab-pane active" id="lA"><!--style="padding-left: 60px; padding-right:100px"-->
-                        @include('peticiones.table.vencidas_altas')
+                        @include('incidencias.peticiones.table.vencidas_altas')
                     </div>
                     <div class="tab-pane" id="lB">
-                        @include('peticiones.table.pendientes')
+                        @include('incidencias.peticiones.table.pendientes')
                     </div>
                     <div class="tab-pane" id="lC">
-                        @include('peticiones.table.atendidas')
+                        @include('incidencias.peticiones.table.atendidas')
                     </div>
 
                 </div>
@@ -48,4 +48,5 @@
         </div>
     </div>
 </div>
+
 

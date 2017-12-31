@@ -294,7 +294,7 @@
                     </div>
                 </div>
                 <hr width="90%"><!--separdor-->
-                <a href="{{url('/solicitud')}}" class="btn btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i>   Regresar</a>
+                <a href="{{url('/incidencias')}}" class="btn btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i>   Regresar</a>
             </div>
         </div>
     </div>

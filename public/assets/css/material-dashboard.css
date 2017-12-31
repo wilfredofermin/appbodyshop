@@ -3802,7 +3802,7 @@ footer .btn {
 }
 
 .nav-tabs {
-  background: #9c27b0;
+  background: #ffffff;
   border: 0;
   border-radius: 3px;
   padding: 0 15px;
@@ -3823,7 +3823,7 @@ footer .btn {
 .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
   background-color: transparent;
   border: 0 !important;
-  color: #FFFFFF !important;
+  color: #666666 !important;
   font-weight: 500;
 }
 .nav-tabs > li.disabled > a, .nav-tabs > li.disabled > a:hover {

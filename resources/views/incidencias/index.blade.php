@@ -1,21 +1,32 @@
-{{--Titulo de la pagina--}}
+{{--Layout--}}
 @extends('layouts.admin')
 
 {{--Titulo de la pagina--}}
-@section('title','BSC Administrar')
+@section('title','BSC Incidencias')
+
+{{--INICIO MENU PRINCIPAL OPCIONES--}}
+
+{{--Activar al opcion --}}
+@section('incidencias','active')
 
 {{--Desactivar al opciones--}}
 @section('home','')
-@section('solicitud','')
-@section('peticiones','')
+@section('administrar','')
+@section('Configuracion','')
 
-{{--Activar al opcion Administrar--}}
-@section('administrar','active')
+{{--FIN MENU PRINCIPAL OPCIONES--}}
 
 {{--Incluyendo el CSS--}}
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/css/tabs_opciones.css')}}">
 @endsection
+
+{{--Incluyendo los Modales--}}
+@section('modal')
+    @include('modal.add_solicitud')
+    @include('modal.delete_solicitud')
+@endsection
+
 
 @section('content')
 <div class="container-fluid">{{--<div class="container-fluid">--}}
@@ -24,7 +35,7 @@
 
             <li class="tab fancyTab active">
                 <div class="arrow-down"><div class="arrow-down-inner"></div></div>
-                <a id="tab0" href="#tabBody0" role="tab" aria-controls="tabBody0" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-tags"></span><span class="hidden-xs">SOLICITUDES</span></a>
+                <a id="tab0" href="#tabBody0" role="tab" aria-controls="tabBody0" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-tags"></span><span class="hidden-xs">SOLICITUDES&nbsp <span class="badge">{{$sumar_solicitudes}}</span></span></a>
                 <div class="whiteBlock"></div>
             </li>
 
@@ -51,38 +62,33 @@
                 <a id="tab4" href="#tabBody4" role="tab" aria-controls="tabBody4" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-cog"></span><span class="hidden-xs">CONFIGURACION</span></a>
                 <div class="whiteBlock"></div>
             </li>
-            {{--
-            <li class="tab fancyTab">
-                <div class="arrow-down"><div class="arrow-down-inner"></div></div>
-                <a id="tab5" href="#tabBody5" role="tab" aria-controls="tabBody5" aria-selected="true" data-toggle="tab" tabindex="0"><span class="fa fa-question-circle"></span><span class="hidden-xs">Order</span></a>
-                <div class="whiteBlock"></div>
-            </li>
-            --}}
         </ul>
+        {{--INICIO SOLICITUD--}}
         <div id="myTabContent" class="tab-content fancyTabContent" aria-live="polite">
             <div class="tab-pane  fade active in" id="tabBody0" role="tabpanel" aria-labelledby="tab0" aria-hidden="false" tabindex="0">
                 <div>
                     <div class="row">
-                            <div class="col-md-11">
-                                <form class="navbar-form navbar-right" role="search">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Buscar ..">
-                                        <span class="material-input"></span>
-                                        <span class="material-input"></span></div>
-                                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                                        <i class="material-icons">search</i><div class="ripple-container"></div>
-                                    </button>
-                                </form>
-                            </div>
                         <div class="col-md-12">
-                          @include('administrar.tabs.solicitud')
+                            {{--Este contiene la Tabla--}}
+                            @if($c_solicitudes<>null)
+                                @include('incidencias.tabs.solicitud')
+                            @else
+                                <div align="center">
+                                    <h4><span class="tim-note"></span>AUN NO EXISTEN DATOS REGISTRADOS</h4>
+
+                                    <a href="#" id="tourIntro" class="btn btn-success btn-raised btn-lg" >
+                                        <i class="fa fa-bus"> </i>   Inicia un demo
+                                    </a>
+                                </div>
+                            @endif
                         </div>
+                        @include('incidencias.solicitudes.include.button-float')
                     </div>
                 </div>
             </div>
+            {{--INICIO ASIGNACIONES--}}
             <div class="tab-pane  fade" id="tabBody1" role="tabpanel" aria-labelledby="tab1" aria-hidden="true" tabindex="0">
                 <div class="row">
-
                     <div class="col-md-12">
                         <h2>This is the content of tab two.</h2>
                         <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
@@ -90,6 +96,7 @@
                     </div>
                 </div>
             </div>
+            {{--INICIO AUTORIZACIONES--}}
             <div class="tab-pane  fade" id="tabBody2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" tabindex="0">
                 <div class="row">
                     <div class="col-md-12">
@@ -99,6 +106,7 @@
                     </div>
                 </div>
             </div>
+            {{--INICIO ADMINISTRAR--}}
             <div class="tab-pane  fade" id="tabBody3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" tabindex="0">
                 <div class="row">
                     <div class="col-md-12">
@@ -108,6 +116,7 @@
                     </div>
                 </div>
             </div>
+            {{--INICIO CONFIGURACION--}}
             <div class="tab-pane  fade" id="tabBody4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" tabindex="0">
                 <div class="row">
                     <div class="col-md-12">
@@ -117,20 +126,10 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane  fade" id="tabBody5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" tabindex="0">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>This is the content of tab six.</h2>
-                        <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <br>
 </div>
-
 @endsection
 
 {{--Incluyendo el Javascript--}}

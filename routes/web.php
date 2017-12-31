@@ -24,6 +24,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/solicitud','SolicitudController');
 
+Route::resource('/incidencias','IncidenciasController');
+
 Route::get('/peticion','PeticionesController@index');
 
 Route::get('/administrar','AdminController@index');

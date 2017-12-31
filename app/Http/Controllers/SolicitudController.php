@@ -40,7 +40,7 @@ class SolicitudController extends Controller
                 ->where('user_id',Auth::id())
                 ->where('condicion',3)
                 ->orderBy('created_at','desc')
-                ->Paginate(4);
+                ->Paginate(8);
 
 
                /* Where(function($query)
@@ -113,10 +113,12 @@ class SolicitudController extends Controller
            //$fecha_compromiso->addDays(2);
             //$today=Carbon::today();
 
+            $sumar_solicitudes=$c_completo+$c_en_proceso+$c_rechazados+$c_pendientes;
+
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             return view('solicitudes.index')->with(compact('categories','sucursales','services','areas',
                 'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText',
-                'c_en_proceso','m_solicitudes','sumar_condicion','c_vencidos')
+                'c_en_proceso','m_solicitudes','sumar_condicion','c_vencidos','sumar_solicitudes')
             );
         }
     }
@@ -195,7 +197,7 @@ class SolicitudController extends Controller
             );
             //Session::flash('guardar', 'My message');
             //session()->flash('notification',$notification);
-            return redirect('/solicitud')->with($notification);
+            return redirect('/incidencias')->with($notification);
 
         } else {
             //De lo contrario realiza los siguien | Esto permite guardar sin tener que cambiar la imagen actual.
@@ -208,7 +210,7 @@ class SolicitudController extends Controller
             );
             //Session::flash('guardar', 'My message');
             //session()->flash('notification',$notification);
-            return redirect('/solicitud')->with($notification);
+            return redirect('/incidencias')->with($notification);
         }
     }
 
@@ -258,7 +260,7 @@ class SolicitudController extends Controller
         //CATEGORIA
         $categories=Category::all();
 
-        return view('solicitudes.edit')->with(compact('complit','solicitud','sucursales','services','areas','categories','asignado'));
+        return view('incidencias.solicitudes.edit')->with(compact('complit','solicitud','sucursales','services','areas','categories','asignado'));
     }
 
     /**
@@ -324,7 +326,7 @@ class SolicitudController extends Controller
                 'alert-type' => 'update_solicitud'
             );
             //session()->flash('notification',$notification);
-            return redirect('/solicitud')->with($notification);
+            return redirect('/incidencias')->with($notification);
 
         }
             //De lo contrario realiza los siguien | Esto permite guardar sin tener que cambiar la imagen actual.
@@ -335,7 +337,7 @@ class SolicitudController extends Controller
                 'alert-type' => 'update_solicitud'
             );
             //session()->flash('notification',$notification);
-        return redirect('/solicitud')->with($notification);
+        return redirect('/incidencias')->with($notification);
 
 
     }
@@ -352,7 +354,7 @@ class SolicitudController extends Controller
             'alert-type' => 'delete_solicitud'
         );
         //session()->flash('notification',$notification);
-        return redirect('/solicitud')->with($notification);
+        return redirect('/incidencias')->with($notification);
 
        // Return redirect()->route('solicitud.index');
     }

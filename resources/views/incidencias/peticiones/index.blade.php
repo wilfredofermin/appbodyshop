@@ -6,12 +6,12 @@
 
 {{--Incluyendo el Javascript--}}
 @section('script')
-@include('peticiones.js.script')
+@include('incidencias.peticiones.js.script')
 @endsection
 
 {{--Incluyendo el CSS--}}
 @section('css')
-@include('peticiones.css.css_tabs')
+@include('incidencias.peticiones.css.css_tabs')
 @endsection
 
 
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="row">
-                @include('peticiones.tabs.tabs')
+                @include('incidencias.peticiones.tabs.tabs')
             </div>
         </div>
         @section('modal')

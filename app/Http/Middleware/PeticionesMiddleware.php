@@ -20,7 +20,7 @@ class PeticionesMiddleware
         //IS_SOPPORT -> ROL=2
         //IS_EVALUATOR -> ROL=3
 
-        if(!Auth::check()) // VERIFICO QUE ESTE VALIDADO
+        if(!Auth::check()) // VERIFICO QUE ESTE VALIDADO. DE NO ESTARLO LO ENVIO AL LOGIN
             return redirect('login');
         if(Auth::user()->role>3)// SI NO TIENE EL ROLE DE ADMIN-SOPORTE-EVALUADOR PASARA A SOLICITUD
             return redirect('solicitud');

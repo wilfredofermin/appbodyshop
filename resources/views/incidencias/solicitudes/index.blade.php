@@ -103,7 +103,7 @@
             <div class="card-content table-responsive">
                 {{--INCLUYENDO LAS TABLAS DE LAS SOLITUDES--}}
                 @if($c_solicitudes<>null)
-                    @include('solicitudes.table.tabla_lista_solicitudes')
+                    @include('incidencias.solicitudes.table.tabla_lista_solicitudes')
                 @else
                    <div align="center">
                        <h4><span class="tim-note"></span>AUN NO EXISTEN DATOS REGISTRADOS</h4>
@@ -126,10 +126,10 @@
 
 @endsection
 @if ($sumar_condicion!=null)
-    @include('solicitudes.table.tabla_lista_estados')
+    @include('incidencias.solicitudes.table.tabla_lista_estados')
 @endif
 
-@include('solicitudes.include.button-float')
+@include('incidencias.solicitudes.include.button-float')
 
 
 

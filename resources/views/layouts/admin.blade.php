@@ -85,13 +85,13 @@
                         <i class="material-icons">dashboard</i>
                         <p>DASHBOARD</p>
                     </a>
-                <li class="@yield('solicitud')">
-                    <a href="{{url('/solicitud')}}">
+                <li class="@yield('incidencias')">
+                    <a href="{{url('/incidencias')}}">
                         <i class="material-icons">assignment_turned_in</i>
-                        <p>SOLICITUD</p>
+                        <p>INCIDENCIAS</p>
                     </a>
                 </li>
-
+                {{--
                 @if (Auth::user()->is_support || Auth::user()->is_admin )
                     <li class="@yield('peticiones')">
                         <a href="{{url('/peticion')}}">
@@ -108,6 +108,7 @@
                         </a>
                     </li>
                 @endif
+                --}}
             </ul>
         </div>
     </div>
@@ -219,68 +220,15 @@
 <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
 <script src="{{asset('assets/js/demo.js')}}"></script>
 
+
     <!--  NOTIFICACIONES NOTIFY BIENVENIDA || http://bootstrap-notify.remabledesigns.com/ -->
 @include('include.notifications.notify-bienvenido')
 
     <!--  NOTIFICACIONES TOASTR DEL SISTEMA-->
 @include('include.notifications.toastr_notifications')
 
-<!--  TOUR DEL SISTEMA -->
-<script>
-    $(function(){
-        $('#tourIntro').click(function(){
-            Tour.run([
-                {
-                    element: $('#main'),
-                    content: 'Agrega una nueva solicitud.',
-                    position: 'left'
-                },
-                {
-                    element: $('#completos'),
-                    content: 'Aqui tus solicitudes completadas.',
-                    position: 'bottom'
-                },
+@yield('script')
 
-                {
-                    element: $('#enproceso'),
-                    content: 'Las que estan en proceso de ser completadas.',
-                    position: 'bottom'
-                },
-                {
-                    element: $('#pendientes'),
-                    content: 'Las que aun no han sido verificadas',
-                    position: 'bottom'
-                },
-                {
-                    element: $('#rechazados'),
-                    content: 'Las que te han recharzado',
-                    position: 'bottom'
-                },
-                {
-                    element: $('#mensajes'),
-                    content: 'informacion variada del sistema',
-                    position: 'bottom'
-                },
-                {
-                    element: $('#perfil'),
-                    content: 'Opciones de tu perfil y salida del sistema',
-                    position: 'bottom'
-                },
-                {
-                    element: $('#contenido'),
-                    content: 'En esta area visualizaras todas tus solicitudes',
-                    position: 'top'
-                },
-                {
-                    element: $('#menu'),
-                    content: 'Tus opciones disponibles.Estas varian en funcion al permiso que tengas.',
-                    position: 'top'
-                },
-
-            ],{language:"es"});
-        });
-    });
-</script>
 
 
 <!--SELECT DINAMICOS -->
@@ -371,16 +319,7 @@
         $("#select-category").focus();
     });
 </script>
-{{--TAB MENU ADMIN--}}
-<script>
-    $(document).ready(function() {
-        $(".btn-pref .btn").click(function () {
-            $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
-            // $(".tab").addClass("active"); // instead of this do the below
-            $(this).removeClass("btn-default").addClass("btn-primary");
-        });
-    });
-</script>
+
 
 <script type="text/javascript">
 
@@ -406,7 +345,7 @@
 
 </script>
 
-@yield('script')
+
 
 </html>
 
