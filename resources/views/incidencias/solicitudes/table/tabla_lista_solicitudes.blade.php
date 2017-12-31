@@ -1,5 +1,6 @@
-
-<table class="table table-hover" data-toggle="dataTable" data-form="deleteForm">
+<div class="card">
+    <div class="card-content table-responsive">
+        <table class="table table-hover " data-toggle="dataTable" data-form="deleteForm">
     <thead class="text-primary">
     <tr>
         <th>Id</th>
@@ -86,10 +87,13 @@
         </tbody>
     @endforeach
 </table>
+    </div>
+    <div align="center">
+        {{ $solicitudes->links() }}
 
-<div align="center">
-    {{ $solicitudes->links() }}
+    </div>
 
 </div>
+
 
 

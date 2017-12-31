@@ -1,8 +1,8 @@
 @extends('layouts.admin')
-@section('content')
 @section('title','BSC Editar')
 @section('home','')
-@section('solicitud','active')
+@section('incidencias','active')
+@section('content')
 <div class="col-md-8">
     <div class="card">
         <div class="card-header" data-background-color="purple">
