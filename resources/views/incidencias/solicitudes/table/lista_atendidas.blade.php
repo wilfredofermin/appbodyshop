@@ -1,9 +1,9 @@
-
-<div class="col-md-12">
-    <div class="card">
-        <table class="table table-hover" style="height:20px; overflow:auto;">
-                <thead class="text-primary">
+<div class="card">
+    <div class="card-content table-responsive">
+        <table class="table table-hover " data-toggle="dataTable" data-form="deleteForm">
+            <thead class="text-primary">
                     <tr>
+                        <th>Id</th>
                         <th>Estado</th>
                         <th>Fecha</th>
                         <th>Prioridad</th>
@@ -15,54 +15,54 @@
                         <th>Asignado a</th>
                     </tr>
                 </thead>
-                <tfoot>
-                        <!-- Button trigger modal -->
-                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-placement="top" title="Ver todas las solicitudes completadas">
-                            <i class="fa fa-eye" aria-hidden="true"></i> Completos</a>
-                        </button>
-                </tfoot>
                 <tbody>
-                    @foreach($completos as $com)
+                    @foreach($atendidas as $atent)
                     <tr>
+                        {{--ID--}}
+                        <td width="3%">{{$atent->id}}</td>
+
                         {{--ESTADO--}}
-                        @if($com->condicion==3)
+                        {{--
+                        @if($atent->condicion==3)
                             <td width="5%"><span class="label label-primary">En Proceso</span></td>
                         @else
-                            <td width="10%"><span class="label label-success">Completo</span></td>
+                            <td width="5%"><span class="label label-success">Atendida</span></td>
                         @endif
+                        --}}
+                        <td width="5%"><span class="label label-success">Atendida</span></td>
 
                         {{--FECHA--}}
-                        <td width="10%">{{$com->created_at->format('d-m-Y h:i a')}}</td>
+                        <td width="10%">{{$atent->created_at->format('d-m-Y h:i a')}}</td>
 
                         {{--PRIORIDAD--}}
-                        <td width="10%">{{$com->prioridad}}</td>
+                        <td width="10%">{{$atent->prioridad}}</td>
 
                         {{--UBICACION--}}
-                        <td width="10%">{{$com->ubicacion}}</td>
+                        <td width="10%">{{$atent->ubicacion}}</td>
 
                         {{--SERVICIO SOLICITADO--}}
-                        @if($com->servicio==1)
+                        @if($atent->servicio==1)
                             <td width="10%">Tecnologia</td>
                         @else
                             <td width="10%">Servicios generales</td>
                         @endif
 
                         {{--CATEGORIA--}}
-                        @if($com->category==1)
+                        @if($atent->category==1)
                             <td width="10%">Software</td>
-                        @elseif($com->category==2)
+                        @elseif($atent->category==2)
                             <td width="10%">Infraestructura IT</td>
                             @else
                             <td width="10%">Servicios Generales</td>
                         @endif
 
                         {{--SUB CATEGORIA--}}
-                        <td width="10%">{{$com->subcategory}}</td>
+                        <td width="10%">{{$atent->subcategory}}</td>
 
                         {{--TIPO--}}
-                        @if($com->type==1)
+                        @if($atent->type==1)
                             <td width="10%">Problema</td>
-                        @elseif($com->type==2)
+                        @elseif($atent->type==2)
                             <td width="10%">Solicutud</td>
                         @else
                             <td width="10%">Asistencia</td>
@@ -70,9 +70,9 @@
 
                         {{--ASIGNADO--}}
 
-                        @if($com->assign->id==1)
+                        @if($atent->assign->id==1)
                             <td width="10%">Supervision</td>
-                        @elseif($com->assign->id==2)
+                        @elseif($atent->assign->id==2)
                             <td width="10%">Soporte</td>
                         @else
                             <td width="10%">Desarrollo</td>

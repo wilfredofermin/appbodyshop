@@ -30,9 +30,9 @@ class IncidenciasController extends Controller
             $solicitudes = Dbrequest::where('subcategory','LIKE','%'.$searchText.'%')
                 ->where('estado',1)
                 ->where('user_id',Auth::id())
-                ->where('condicion',3)
+                //->where('condicion',3)
                 ->orderBy('created_at','desc')
-                ->Paginate(8);
+                ->Paginate(5);
 
 
             /* Where(function($query)
@@ -67,13 +67,27 @@ class IncidenciasController extends Controller
             //CATEGORIA
             $categories=Category::all();
 
-            //SOLITUDES COMPLETADAS Y EN PROCESO | 1 : COMPLETADO | 2 : EN PROCESO
-            $completos=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->take(3)->orderBy('updated_at','asc')->get();
-            //dd($completos);
-            $complit=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion','<>',3)->orderBy('updated_at','asc')->get();
+            //SOLITUD ATENDIDA
+            $atendidas=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',1)->orderBy('updated_at','asc')->paginate(8);
+
+            //SOLITUDES  EN PROCESO
+           $procesos=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',2)->orderBy('updated_at','asc')->paginate(8);
+
+            //SOLITUDES  PENDIENTES
+            $pendientes=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',3)->orderBy('updated_at','asc')->paginate(8);
+
+
+            //SOLITUDES RECHAZADAS
+            $rechazadas=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',4)->orderBy('updated_at','asc')->paginate(8);
+
+            //SOLITUDES  VENCIDAS
+            $vencidas=Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',5)->orderBy('updated_at','asc')->paginate(8);
+
+
+
             ///CONTEO INDIVIDUAL /////////////////////////////////////////////////////
 
-            //SOLITUDES EN PROCESO
+            //SOLITUDES ATENDIDAS
             $c_completo = Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',1)->count();
 
             $c_en_proceso = Dbrequest::where('user_id',Auth::id())->where('estado', 1)->where('condicion',2)->count();
@@ -111,7 +125,7 @@ class IncidenciasController extends Controller
             ////////////////////////////////////////////////////////////////////////////////////////////////////
             return view('incidencias.index')->with(compact('categories','sucursales','services','areas',
                     'solicitudes','c_solicitudes','c_pendientes','c_rechazados','c_completo', 'ultimo_pendiente','completos','complit','searchText',
-                    'c_en_proceso','m_solicitudes','sumar_condicion','c_vencidos','sumar_solicitudes')
+                    'c_en_proceso','m_solicitudes','sumar_condicion','c_vencidos','sumar_solicitudes','atendidas','procesos','vencidas','rechazadas','pendientes')
             );
         }
 

@@ -9,7 +9,7 @@
 
             <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
                 {{ csrf_field() }}
-            <h5><span class="tim-note"></span>DATOS DE LA SOLICITUD</h5>
+            <h5><span class="tim-note"></span>SOLICITUD</h5>
             </div>
             <div class="card wizard-card" data-color="purple" id="wizard">
             {!!Form::model($solicitud,['id'=>'profile-form','method'=>'PATCH','files' => true,'route'=>['solicitud.update',$solicitud->id]])!!}

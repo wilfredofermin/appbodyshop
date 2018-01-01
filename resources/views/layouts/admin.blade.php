@@ -91,7 +91,7 @@
                         <p>INCIDENCIAS</p>
                     </a>
                 </li>
-                {{--
+            {{--
                 @if (Auth::user()->is_support || Auth::user()->is_admin )
                     <li class="@yield('peticiones')">
                         <a href="{{url('/peticion')}}">

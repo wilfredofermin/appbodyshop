@@ -90,9 +90,7 @@
             <div class="tab-pane  fade" id="tabBody1" role="tabpanel" aria-labelledby="tab1" aria-hidden="true" tabindex="0">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>This is the content of tab two.</h2>
-                        <p>This field is a rich HTML field with a content editor like others used in Sitefinity. It accepts images, video, tables, text, etc. Street art polaroid microdosing la croix taxidermy. Jean shorts kinfolk distillery lumbersexual pinterest XOXO semiotics. Tilde meggings asymmetrical literally pork belly, heirloom food truck YOLO. Meh echo park lyft typewriter. </p>
-
+                    @include('incidencias.tabs.asignaciones')
                     </div>
                 </div>
             </div>
